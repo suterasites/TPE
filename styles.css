@@ -1281,6 +1281,7 @@ body.lightbox-open { overflow: hidden; }
   margin: 0;
   counter-reset: process;
 }
+.process-steps-4 { grid-template-columns: repeat(4, 1fr); }
 .process-step {
   background: var(--c-bg-card);
   border: 1px solid var(--c-border);
