@@ -1234,11 +1234,13 @@ body.lightbox-open { overflow: hidden; }
 
 /* ---------- Use-case card grid (interior service pages) ---------- */
 .usecase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-3);
 }
 .usecase-card {
+  flex: 0 1 calc((100% - 2 * var(--space-3)) / 3);
   background: var(--c-bg-card);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
@@ -1418,7 +1420,7 @@ body.lightbox-open { overflow: hidden; }
   .content-split-grid, .content-split-grid.reverse { grid-template-columns: 1fr; }
   .content-split-grid.reverse .content-split-media { order: 0; }
   .content-split-media { aspect-ratio: 16 / 10; }
-  .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+  .usecase-card { flex-basis: calc((100% - var(--space-3)) / 2); }
 }
 
 @media (max-width: 760px) {
@@ -1440,7 +1442,7 @@ body.lightbox-open { overflow: hidden; }
   .page-hero { padding-block: var(--space-6) var(--space-5); }
   .process-steps { grid-template-columns: 1fr; }
   .capability-grid { grid-template-columns: 1fr; }
-  .usecase-grid { grid-template-columns: 1fr; }
+  .usecase-card { flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
