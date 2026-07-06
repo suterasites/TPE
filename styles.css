@@ -1443,6 +1443,7 @@ body.lightbox-open { overflow: hidden; }
   .process-steps { grid-template-columns: 1fr; }
   .capability-grid { grid-template-columns: 1fr; }
   .usecase-card { flex-basis: 100%; }
+  .hide-on-mobile { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
