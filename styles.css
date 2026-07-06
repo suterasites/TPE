@@ -1016,6 +1016,23 @@ body.lightbox-open { overflow: hidden; }
   font-size: 0.8125rem;
   color: var(--c-text-muted);
 }
+.contact-location { margin-top: var(--space-5); display: grid; gap: 4px; }
+.contact-location .contact-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8125rem;
+  color: var(--c-text-muted);
+}
+.contact-address { color: var(--c-text); font-size: 1.0625rem; margin: 0 0 var(--space-3); }
+.map-embed {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  height: clamp(300px, 42vw, 460px);
+}
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* Direct contact section (no form, phone + email focus) */
 .contact-direct .section-head { max-width: 720px; margin-bottom: var(--space-5); }
@@ -1110,6 +1127,7 @@ body.lightbox-open { overflow: hidden; }
   padding: 2px 6px;
   line-height: 1;
 }
+.footer-address { color: var(--c-text-muted); font-size: 0.875rem; }
 .footer-location { color: var(--c-text-faint); font-size: 0.875rem; padding-top: var(--space-1); }
 .footer-col ul.footer-social { margin-top: var(--space-4); display: flex; gap: var(--space-2); grid-template-columns: none; }
 .footer-social a {
