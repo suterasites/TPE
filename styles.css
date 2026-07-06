@@ -1324,6 +1324,7 @@ body.lightbox-open { overflow: hidden; }
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
 }
+.capability-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .capability-item {
   text-align: center;
   padding: var(--space-3) var(--space-2);
