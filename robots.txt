@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://total-piling-mockup.pages.dev/sitemap.xml
+Sitemap: https://www.totalpilingandexcavations.com.au/sitemap.xml
