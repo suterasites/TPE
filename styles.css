@@ -1248,6 +1248,16 @@ body.lightbox-open { overflow: hidden; }
   transition: border-color 250ms var(--ease-out), transform 250ms var(--ease-out);
 }
 .usecase-card:hover { border-color: var(--c-brand-deep); transform: translateY(-2px); }
+/* Service area mesh links (regional screw piling pages). A usecase-card that is itself a
+   link, so it needs its own hover, focus-visible and active states. */
+.area-link { text-decoration: none; color: inherit; }
+.area-link:hover h3 { color: var(--c-brand-bright); }
+.area-link:focus-visible {
+  outline: 2px solid var(--c-brand-bright);
+  outline-offset: 2px;
+  border-color: var(--c-brand-deep);
+}
+.area-link:active { transform: translateY(0); }
 .usecase-card h3 {
   font-size: 1.125rem;
   margin-bottom: var(--space-2);
