@@ -906,7 +906,11 @@ def main():
 
     chrome = {
         "ga4": slice_between(src, "  <!-- Google tag (gtag.js)", "</script>", "the GA4 tag").rstrip(),
-        "fonts": slice_between(src, '  <link rel="preconnect" href="https://fonts.googleapis.com">',
+        # The fonts are self-hosted from assets/fonts as of 2026-09-16 - the
+        # Google Fonts stylesheet was render-blocking on a third-party origin.
+        # This still lifts the block off the parent page, so it inherits any
+        # later change there rather than keeping a second copy in sync.
+        "fonts": slice_between(src, '  <!-- Self-hosted fonts (woff2, latin)',
                                '<link rel="stylesheet" href="../styles.css">', "the font links").rstrip(),
         "leadev": slice_between(src, "  <!-- Sutera lead events (GA4) -->", "</script>",
                                 "the lead events snippet").rstrip(),
