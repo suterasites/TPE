@@ -521,7 +521,7 @@ def slice_between(src, start, end, label):
 
 
 def build_head(city, chrome):
-    url = "%s/services/screw-piling-%s.html" % (BASE, city["slug"])
+    url = "%s/services/screw-piling-%s" % (BASE, city["slug"])
     img = "%s/assets/projects/%s" % (BASE, city["photo"])
     plain = city["name"]
     title = "Screw Piling %s | Total Piling &amp; Excavations" % plain
@@ -535,9 +535,9 @@ def build_head(city, chrome):
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE + "/"},
                     {"@type": "ListItem", "position": 2, "name": "Services",
-                     "item": BASE + "/services.html"},
+                     "item": BASE + "/services"},
                     {"@type": "ListItem", "position": 3, "name": "Screw Piling",
-                     "item": BASE + "/services/screw-piling.html"},
+                     "item": BASE + "/services/screw-piling"},
                     {"@type": "ListItem", "position": 4, "name": plain, "item": url},
                 ],
             },
@@ -645,8 +645,8 @@ __HEADER__
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ol>
           <li><a href="/">Home</a></li>
-          <li><a href="/services.html">Services</a></li>
-          <li><a href="/services/screw-piling.html">Screw Piling</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/services/screw-piling">Screw Piling</a></li>
           <li aria-current="page">__NAME__</li>
         </ol>
       </nav>
@@ -654,7 +654,7 @@ __HEADER__
       <h1>__H1__</h1>
       <p class="page-hero-lead">__LEAD__</p>
       <div class="page-hero-cta">
-        <a href="/contact.html" class="btn btn-primary btn-lg">Get a Free Quote</a>
+        <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
         <a href="tel:0419008549" class="btn btn-ghost btn-lg">Call __PHONE_ROB__</a>
       </div>
     </div>
@@ -795,7 +795,7 @@ __AREAS_MESH__
         <p>Send the plans, engineering, and soil report. We'll come back with a quote, no obligation.</p>
       </div>
       <div class="cta-band-actions">
-        <a href="/contact.html" class="btn btn-primary btn-lg">Request a Quote</a>
+        <a href="/contact" class="btn btn-primary btn-lg">Request a Quote</a>
         <a href="tel:0419008549" class="btn btn-ghost btn-lg">Call Rob __PHONE_ROB__</a>
         <a href="tel:0448725807" class="btn btn-ghost btn-lg">Call Tom __PHONE_TOM__</a>
       </div>
@@ -840,7 +840,7 @@ def areas_block(exclude=None, with_melbourne=False, depth_prefix=""):
     cards = []
     if with_melbourne:
         cards.append(
-            '<a class="usecase-card area-link" href="/services/screw-piling.html">\n'
+            '<a class="usecase-card area-link" href="/services/screw-piling">\n'
             '          <h3>Screw Piling Melbourne</h3>\n'
             '          <p>The main service page. Metro Melbourne and statewide coverage, '
             'residential through to government.</p>\n        </a>')
@@ -848,7 +848,7 @@ def areas_block(exclude=None, with_melbourne=False, depth_prefix=""):
         if c["slug"] == exclude:
             continue
         cards.append(
-            '<a class="usecase-card area-link" href="/services/screw-piling-%s.html">\n'
+            '<a class="usecase-card area-link" href="/services/screw-piling-%s">\n'
             '          <h3>Screw Piling %s</h3>\n          <p>%s</p>\n        </a>'
             % (c["slug"], c["name"], c["blurb"]))
     links = "\n        ".join(cards)
@@ -885,7 +885,7 @@ def patch_sitemap(path):
         xml = fh.read()
     entries = []
     for c in CITIES:
-        loc = "%s/services/screw-piling-%s.html" % (BASE, c["slug"])
+        loc = "%s/services/screw-piling-%s" % (BASE, c["slug"])
         if loc in xml:
             continue
         entries.append(

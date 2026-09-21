@@ -101,9 +101,10 @@ Always check `assets/` before reaching for placeholders or stock imagery.
 - Do NOT cancel the Wix Business plan until DNS is cut over and Tom has confirmed the new site is serving on the apex domain.
 
 ## Multi-Page Consistency
-- **Header / nav:** Desktop mega-nav, mobile nav, and footer must stay in sync across every `.html` file. Service links across all three nav surfaces point to `/services.html#anchor` (not standalone service pages from the nav itself - the per-service pages are linked from the overview).
+- **Header / nav:** Desktop mega-nav, mobile nav, and footer must stay in sync across every `.html` file. Service links across all three nav surfaces point to `/services#anchor` (not standalone service pages from the nav itself - the per-service pages are linked from the overview).
 - **Footer:** Identical across all pages.
 - **Internal links:** When adding a new page, scan all existing pages and update any references to that topic to link in.
+- **Link the clean URL, never the `.html` file.** Cloudflare Pages 308s `/page.html` to `/page`, and the canonicals and sitemap name the clean form. Until 2026-09-21 every internal link, `og:url` and BreadcrumbList item named `.html`, so the clean URLs were linked from nowhere and 12 of 16 pages sat outside Google's index. `href="/about"`, `href="/services/shoring"`, `href="/about#fleet"`. `.build/clean_url_links.py` sweeps and verifies (dry run by default, `--apply` to write); `.build/gen_city_pages.py` emits clean URLs.
 
 ---
 
