@@ -8,3 +8,4 @@ node_modules/
 
 # Internal notes. The host publishes everything tracked here, so this stays local.
 CLAUDE.md
+assets/README.md
