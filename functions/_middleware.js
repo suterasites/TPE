@@ -11,6 +11,13 @@
 // serves those with X-Robots-Tag: noindex), because staged pages on focus/
 // branches are reviewed there before they are published.
 //
+// It also 301s every /page.html to the clean /page (TPE's marketer asked for
+// a 301 specifically, 2026-11-27). Cloudflare already answered those with a
+// 308, which is just as permanent, but a _redirects file cannot take over:
+// Pages does not apply _redirects to routes a Function serves, and this
+// middleware serves every non-asset route. Doing both here also makes
+// tpe-12t.pages.dev/about.html one hop to www/about instead of two.
+//
 // _routes.json keeps static assets out of this function, so a page view on
 // the live domain costs one invocation, not one per image.
 
@@ -19,11 +26,20 @@ const LIVE_HOST = "www.totalpilingandexcavations.com.au";
 
 export async function onRequest({ request, next }) {
   const url = new URL(request.url);
+  let moved = false;
   if (url.hostname === OLD_HOST) {
     url.protocol = "https:";
     url.hostname = LIVE_HOST;
     url.port = "";
-    return Response.redirect(url.toString(), 301);
+    moved = true;
   }
-  return next();
+  if (url.pathname.endsWith(".html")) {
+    // /index.html and /x/index.html -> the folder; /about.html -> /about
+    url.pathname = url.pathname.endsWith("/index.html")
+      ? url.pathname.slice(0, -"index.html".length)
+      : url.pathname.slice(0, -".html".length);
+    moved = true;
+  }
+  // The query string rides along untouched, so a gclid on an ad click survives.
+  return moved ? Response.redirect(url.toString(), 301) : next();
 }
