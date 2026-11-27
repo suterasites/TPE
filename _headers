@@ -1,0 +1,5 @@
+# The old test host 301s to the live domain (functions/_middleware.js), but
+# _routes.json keeps static assets away from that function, so images and video
+# still answer on it. Keep them out of Google so nothing on that host is indexed.
+https://tpe-12t.pages.dev/*
+  X-Robots-Tag: noindex
