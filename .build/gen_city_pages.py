@@ -573,6 +573,7 @@ def build_head(city, chrome):
     return """<!DOCTYPE html>
 <html lang="en-AU">
 <head>
+__GTM__
 __GA4__
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -606,7 +607,8 @@ __LD__
 __FONTS__
 __LEADEV__
 </head>
-""".replace("__GA4__", chrome["ga4"]) \
+""".replace("__GTM__", chrome["gtm"]) \
+   .replace("__GA4__", chrome["ga4"]) \
    .replace("__FONTS__", chrome["fonts"]) \
    .replace("__LEADEV__", chrome["leadev"]) \
    .replace("__TITLE__", title) \
@@ -905,7 +907,17 @@ def main():
         src = fh.read()
 
     chrome = {
-        "ga4": slice_between(src, "  <!-- Google tag (gtag.js)", "</script>", "the GA4 tag").rstrip(),
+        # TPE's own Tag Manager container (GTM-K77QM2JZ, added 2026-11-27 at
+        # Tom's request for their Google Ads). Google says it goes straight
+        # after <head>, so it sits above our GA4 tag on every page.
+        "gtm": slice_between(src, '  <script async src="https://www.googletagmanager.com/gtm.js',
+                             " -->", "the Tag Manager tag").rstrip(),
+        # The GA4 tag is TWO script elements: the loader and the inline config.
+        # Until 2026-11-27 this sliced to the first </script>, which is the
+        # loader's own, so all six city pages shipped without gtag('config')
+        # and recorded no page views and no click_to_call taps. "\n  </script>"
+        # is the inline block's closing tag (the loader's is on the same line).
+        "ga4": slice_between(src, "  <!-- Google tag (gtag.js)", "\n  </script>", "the GA4 tag").rstrip(),
         # The fonts are self-hosted from assets/fonts as of 2026-09-16 - the
         # Google Fonts stylesheet was render-blocking on a third-party origin.
         # This still lifts the block off the parent page, so it inherits any
